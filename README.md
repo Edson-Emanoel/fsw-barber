@@ -1,26 +1,28 @@
 ## Comandos
 
 npx create-next-app@14 fsw-barber ou npm install next@14
+
 npm install prisma --save-dev
+
 npx prisma init --datasource-provider postgresql
+
 DATABASE_URL="postgresql://neondb_owner:npg_ukdF1iLPamr7@ep-crimson-sun-a5q6fpjr-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require"
+
 npx prisma migrate dev --name init_db
+
 npm install ts-node -D
+
 npx prisma db seed
 
 npm install tailwindcss @tailwindcss/postcss postcss
+
 `npx shadcn@latest init` não `npx shadcn-ui@latest init`
+
 npx shadcn@latest add button
+
 npm install -D husky lint-staged
+
 npx husky init
-
-[x] Setup do Banco
-[x] Sedding do banco (colocar dados)
-[x] Introdução do Next.JS
-[x] Tailwind e Shadcn
-[x] Git Hooks
-
-git commit -m "chore: initial setup of the project"
 
 ## Tabelas:
 
