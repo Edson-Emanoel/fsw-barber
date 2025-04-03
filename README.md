@@ -25,8 +25,14 @@ npm install tailwindcss @tailwindcss/postcss postcss
 `npx shadcn@latest init` não `npx shadcn-ui@latest init`
 
 npx shadcn@latest add button
+
 npx shadcn@latest add card
+
 npx shadcn@latest add input
+
+npx shadcn@latest add badge
+
+npx shadcn@latest add avatar
 
 npm install -D husky lint-staged
 
