@@ -1,3 +1,9 @@
+## Como o Projeto está ficando ...
+
+- No Mobile:
+
+<img src="./screens/Mobile01.png" />
+
 ## Comandos
 
 npx create-next-app@14 fsw-barber ou npm install next@14
@@ -19,6 +25,8 @@ npm install tailwindcss @tailwindcss/postcss postcss
 `npx shadcn@latest init` não `npx shadcn-ui@latest init`
 
 npx shadcn@latest add button
+npx shadcn@latest add card
+npx shadcn@latest add input
 
 npm install -D husky lint-staged
 
