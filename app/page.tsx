@@ -1,21 +1,27 @@
 import Image from "next/image";
 import Header from "./_components/header";
-import { SearchIcon } from "lucide-react";
+import { FootprintsIcon, SearchIcon } from "lucide-react";
 
+import { db } from "./_lib/prisma";
+import { Badge } from "./_components/ui/badge";
 import { Input } from "./_components/ui/input";
 import { Button } from "./_components/ui/button";
 import { Card, CardContent } from "./_components/ui/card";
-import { Badge } from "./_components/ui/badge";
-import { Avatar, AvatarImage } from "./_components/ui/avatar";
-import { db } from "./_lib/prisma";
 import BarbershopItem from "./_components/barbershop-item";
+import { Avatar, AvatarImage } from "./_components/ui/avatar";
 
 const Home = async () => {
   // Chamar meu banco de dados
   const barbershops = await db.barbershop.findMany({});
+  const popularBarbershops = await db.barbershop.findMany({
+    orderBy: {
+      name: "desc"
+    }
+  })
   
   console.log({barbershops});
-  return <div>
+  return ( 
+  <div>
     {/* Header */}
     <Header />
     <div className="p-5">
@@ -32,6 +38,34 @@ const Home = async () => {
         </Button>
       </div>
 
+      {/* Busca Rápida */}
+      <div className="flex gap-3 mt-6 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
+        <Button className="gap-2" variant="secondary">
+          <Image src="/cabelo.svg" alt="Cabelo" width={16} height={16} />
+          Cabelo
+        </Button>
+
+        <Button className="gap-2" variant="secondary">
+          <Image src="/barba.svg" alt="Barba" width={16} height={16} />
+          Barba
+        </Button>
+
+        <Button className="gap-2" variant="secondary">
+          <Image src="/acabamento.svg" alt="Acabamento" width={16} height={16} />
+          Acabamento
+        </Button>
+
+        <Button className="gap-2" variant="secondary">
+          <FootprintsIcon size={16} />
+          Pezinho
+        </Button>
+
+        <Button className="gap-2" variant="secondary">
+          <Image src="/sobrancelha.svg" alt="Sobrancelha" width={16} height={16} />
+          Sobrancelha
+        </Button>
+      </div>
+
       {/* Imagem */}
       <div className="relative mt-6 h-[150px] w-full">
         <Image
@@ -43,7 +77,6 @@ const Home = async () => {
       </div>
 
       {/* Agendamento */}
-
       <h2 className="mt-6 mb-3 ml-1 text-xs font-bold uppercase text-gray-400">
         Agendamentos
       </h2>
@@ -77,10 +110,31 @@ const Home = async () => {
       </h2>
 
       <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
-        {barbershops.map((barbershop) => <BarbershopItem key={barbershop.id} barbershop={barbershop} />)}
+        {barbershops.map((barbershop) => (
+          <BarbershopItem key={barbershop.id} barbershop={barbershop} />
+        ))}
+      </div>
+
+      <h2 className="mt-6 mb-3 ml-1 text-xs font-bold uppercase text-gray-400">
+        Populares
+      </h2>
+
+      <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
+        {popularBarbershops.map((barbershop) => (
+          <BarbershopItem key={barbershop.id} barbershop={barbershop} />
+        ))}
       </div>
     </div>
-  </div>;
+
+    <footer>
+      <Card>
+        <CardContent className="px-5 py-6">
+          <p className="text-sm text-gray-400">© 2025 Copyright <span className="font-bold">FSW Barber</span></p>
+        </CardContent>
+      </Card>
+    </footer>
+  </div>
+  )
 }
 
 export default Home
