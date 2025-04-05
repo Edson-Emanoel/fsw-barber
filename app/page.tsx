@@ -3,14 +3,12 @@ import Header from "./_components/header";
 import { SearchIcon } from "lucide-react";
 
 import { db } from "./_lib/prisma";
-import { Badge } from "./_components/ui/badge";
 import { Input } from "./_components/ui/input";
 import { Button } from "./_components/ui/button";
+import BookingItem from "./_components/booking-item";
 import { quickSearchOptions } from "./_constants/search";
 import { Card, CardContent } from "./_components/ui/card";
 import BarbershopItem from "./_components/barbershop-item";
-import { Avatar, AvatarImage } from "./_components/ui/avatar";
-import BookingItem from "./_components/booking-item";
 
 const Home = async () => {
   // Chamar meu banco de dados
@@ -44,7 +42,7 @@ const Home = async () => {
       <div className="flex gap-3 mt-6 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
         {quickSearchOptions.map((option) => (
           <Button key={option.title} className="gap-2" variant="secondary">
-            <Image src={option.imageUrl} alt="Cabelo" width={16} height={16} />
+            <Image src={option.imageUrl} alt={option.title} width={16} height={16} />
             {option.title}
           </Button>
         ))}

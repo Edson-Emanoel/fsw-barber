@@ -18,6 +18,8 @@ npx prisma migrate dev --name init_db
 
 npm install ts-node -D
 
+-1:04:43
+
 npx prisma db seed
 
 npm install tailwindcss @tailwindcss/postcss postcss
