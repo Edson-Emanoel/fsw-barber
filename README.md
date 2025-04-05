@@ -6,7 +6,11 @@
 
 ## Comandos
 
-npx create-next-app@14 fsw-barber ou npm install next@14
+- Criação do Projeto:npx create-next-app@14 fsw-barber
+
+chore: add next auth setup
+
+### Prisma 
 
 npm install prisma --save-dev
 
@@ -19,6 +23,8 @@ npx prisma migrate dev --name init_db
 npm install ts-node -D
 
 npx prisma db seed
+
+### TailwindCSS e Shadcn/ui
 
 npm install tailwindcss @tailwindcss/postcss postcss
 
@@ -37,6 +43,18 @@ npx shadcn@latest add avatar
 npx shadcn@latest add sonner
 
 npx shadcn@latest add sheet
+
+npx shadcn@latest add dialog
+
+### Next-Auth
+
+npm install next-auth
+
+npm install @prisma/client @auth/prisma-adapter
+
+npm install prisma --save-dev
+
+### Configuração ao fazer commits
 
 npm install -D husky lint-staged
 
