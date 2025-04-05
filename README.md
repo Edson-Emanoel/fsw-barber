@@ -4,8 +4,6 @@
 
 <img src="./screens/Mobile01.png" />
 
-feat: adicionei o componente PhoneItem, componentizei o Footer e o adicionei no layout
-
 ## Comandos
 
 npx create-next-app@14 fsw-barber ou npm install next@14
@@ -37,6 +35,8 @@ npx shadcn@latest add badge
 npx shadcn@latest add avatar
 
 npx shadcn@latest add sonner
+
+npx shadcn@latest add sheet
 
 npm install -D husky lint-staged
 

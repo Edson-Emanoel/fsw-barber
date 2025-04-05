@@ -6,8 +6,7 @@ import { db } from "./_lib/prisma";
 import { Input } from "./_components/ui/input";
 import { Button } from "./_components/ui/button";
 import BookingItem from "./_components/booking-item";
-import { quickSearchOptions } from "./_constants/search";
-import { Card, CardContent } from "./_components/ui/card";
+import { quickSearchOptions } from "./_constants/search"; 
 import BarbershopItem from "./_components/barbershop-item";
 
 const Home = async () => {
