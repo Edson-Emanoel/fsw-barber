@@ -4,7 +4,7 @@
 
 <img src="./screens/Mobile01.png" />
 
-Assegurei que os serviços da barbearia estão sendo mostrados na página de barbearia(barbershop)
+feat: adicionei o componente PhoneItem, componentizei o Footer e o adicionei no layout
 
 ## Comandos
 
@@ -35,6 +35,8 @@ npx shadcn@latest add input
 npx shadcn@latest add badge
 
 npx shadcn@latest add avatar
+
+npx shadcn@latest add sonner
 
 npm install -D husky lint-staged
 
