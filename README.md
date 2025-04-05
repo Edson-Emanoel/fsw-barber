@@ -4,6 +4,8 @@
 
 <img src="./screens/Mobile01.png" />
 
+Assegurei que os serviços da barbearia estão sendo mostrados na página de barbearia(barbershop)
+
 ## Comandos
 
 npx create-next-app@14 fsw-barber ou npm install next@14
@@ -17,8 +19,6 @@ DATABASE_URL="postgresql://neondb_owner:npg_ukdF1iLPamr7@ep-crimson-sun-a5q6fpjr
 npx prisma migrate dev --name init_db
 
 npm install ts-node -D
-
--1:04:43
 
 npx prisma db seed
 

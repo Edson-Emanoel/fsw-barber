@@ -19,7 +19,7 @@ const Home = async () => {
     }
   })
   
-  console.log({barbershops});
+  // console.log({barbershops});
   return ( 
   <div>
     {/* Header */}
