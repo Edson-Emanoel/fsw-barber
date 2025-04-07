@@ -8,9 +8,7 @@
 
 - Criação do Projeto:npx create-next-app@14 fsw-barber
 
-chore: add next auth setup
-
-### Prisma 
+### Prisma
 
 npm install prisma --save-dev
 
@@ -59,6 +57,12 @@ npm install prisma --save-dev
 npm install -D husky lint-staged
 
 npx husky init
+
+### Comandos para rodar algo
+
+npm run dev
+
+npm run build
 
 ## Tabelas:
 
