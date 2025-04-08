@@ -31,7 +31,7 @@ model Account { // Conta
   token_type        String?
   scope             String?
   id_token          String?
-  session_state     String?
+  session_state     String?f
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
