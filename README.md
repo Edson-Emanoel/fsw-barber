@@ -6,7 +6,7 @@
 
 ## Comandos
 
-- Criação do Projeto:npx create-next-app@14 fsw-barber
+- Criação do Projeto: npx create-next-app@14 fsw-barber
 
 ### Prisma
 
@@ -44,6 +44,8 @@ npx shadcn@latest add sheet
 
 npx shadcn@latest add dialog
 
+npx shadcn@latest add form
+
 ### Next-Auth
 
 npm install next-auth
@@ -51,6 +53,8 @@ npm install next-auth
 npm install @prisma/client @auth/prisma-adapter
 
 npm install prisma --save-dev
+
+npm install @hookform/resolvers
 
 ### Configuração ao fazer commits
 
