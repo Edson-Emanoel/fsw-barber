@@ -8,6 +8,8 @@
 
 - Criação do Projeto: npx create-next-app@14 fsw-barber
 
+"feat: assegurei que as barbearias podem ser encontradas pelo nome e serviço"
+
 ### Prisma
 
 npm install prisma --save-dev
