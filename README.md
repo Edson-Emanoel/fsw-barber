@@ -1,5 +1,5 @@
 ## Como o Projeto está ficando ...
-
+"feat: garanti que o agendamento fosse criado com sucesso, e está tudo dando certo"
 - No Mobile:
 
 <img src="./screens/Mobile01.png" />
@@ -7,8 +7,6 @@
 ## Comandos
 
 - Criação do Projeto: npx create-next-app@14 fsw-barber
-
-"feat: assegurei que as barbearias podem ser encontradas pelo nome e serviço"
 
 ### Prisma
 
@@ -48,6 +46,8 @@ npx shadcn@latest add dialog
 
 npx shadcn@latest add form
 
+npx shadcn@latest add calendar
+
 ### Next-Auth
 
 npm install next-auth
@@ -64,7 +64,9 @@ npm install -D husky lint-staged
 
 npx husky init
 
-### Comandos para rodar algo
+### Outros
+
+npm install date-fns
 
 npm run dev
 
