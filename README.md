@@ -1,5 +1,5 @@
 ## Como o Projeto está ficando ...
-"feat: garanti que o agendamento fosse criado com sucesso, e está tudo dando certo"
+
 - No Mobile:
 
 <img src="./screens/Mobile01.png" />
