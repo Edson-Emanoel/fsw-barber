@@ -1,3 +1,5 @@
+"feat: garanti que os agendamentos sejam listados na página de agendamentos"
+
 ## Como o Projeto está ficando ...
 
 - No Mobile:

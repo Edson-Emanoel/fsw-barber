@@ -1,24 +1,44 @@
 import Image from "next/image";
 import Header from "./_components/header";
-
+import Link from "next/link";
 import { db } from "./_lib/prisma";
+import { authOptions } from "./_lib/auth";
 import Search from "./_components/search";
+import { getServerSession } from "next-auth";
 import { Button } from "./_components/ui/button";
 import BookingItem from "./_components/booking-item";
 import { quickSearchOptions } from "./_constants/search"; 
 import BarbershopItem from "./_components/barbershop-item";
-import Link from "next/link";
 
 const Home = async () => {
-  // Chamar meu banco de dados
+  const session = await getServerSession(authOptions)
   const barbershops = await db.barbershop.findMany({});
   const popularBarbershops = await db.barbershop.findMany({
     orderBy: {
       name: "desc"
     }
   })
+  const bookings = session?.user
+    ? await db.booking.findMany({
+        where: {
+          userId: (session?.user as any).id,
+          date: {
+            gte: new Date(),
+          },
+        },
+        include: {
+          service: {
+            include: {
+              barbershop: true,
+            },
+          },
+        },
+        orderBy: {
+          date: "asc",
+        }
+    })
+  : []
   
-  // console.log({barbershops});
   return ( 
   <div>
     {/* Header */}
@@ -56,7 +76,15 @@ const Home = async () => {
       </div>
 
       {/* Agendamento */}
-      <BookingItem />
+      <h2 className="mt-6 mb-3 ml-1 text-xs font-bold uppercase text-gray-400">
+        Meus Agendamentos
+      </h2>
+
+      <div className="flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+        {bookings.map((booking) => (
+          <BookingItem key={booking.id} booking={booking} />
+        ))}
+      </div>
 
       <h2 className="mt-6 mb-3 ml-1 text-xs font-bold uppercase text-gray-400">
         Recomendados
