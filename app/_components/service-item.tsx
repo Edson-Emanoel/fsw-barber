@@ -4,12 +4,14 @@ import Image from "next/image";
 import { toast } from "sonner";
 import { Button } from "./ui/button";
 import { ptBR } from "date-fns/locale";
-import { addDays, format, set } from "date-fns";
 import { Calendar } from "./ui/calendar";
-import { useEffect, useState } from "react";
+import SignInDialog from "./sign-in-dialog";
 import { useSession } from "next-auth/react";
 import { Card, CardContent } from "./ui/card";
+import { Dialog, DialogContent } from "./ui/dialog";
+import { useEffect, useMemo, useState } from "react";
 import { getBookings } from "../_actions/get-bookings";
+import { format, isPast, isToday, set } from "date-fns";
 import { createBooking } from "../_actions/create-booking";
 import {Barbershop, BarbershopService, Booking } from "@prisma/client";
 import {
@@ -19,8 +21,6 @@ import {
     SheetHeader,
     SheetContent,
 } from "./ui/sheet";
-import SignInDialog from "./sign-in-dialog";
-import { Dialog, DialogContent } from "./ui/dialog";
 
 interface ServiceItemProps {
     service: BarbershopService
@@ -51,17 +51,25 @@ const TIME_LIST = [
     "18:00",
 ]
 
-const getTimeList = (bookings: Booking[]) => {
-    // TODO: Não Exibir horários no passado
+interface GetTimeListProps {
+    bookings: Booking[]
+    selectedDay: Date
+}
+
+const getTimeList = ({bookings, selectedDay}: GetTimeListProps) => {
     return TIME_LIST.filter(time => {
         const hour = Number(time.split(":")[0])
         const minutes = Number(time.split(":")[1])
         
+        const timeIsOnThePast = isPast(set(new Date, {hours: hour, minutes: minutes}))
+        if(timeIsOnThePast && isToday(selectedDay)){
+            return false
+        }
+
         const hasBookingOnCurrentTime = bookings.some(
             (booking) => booking.date.getHours() === hour &&
             booking.date.getMinutes() === minutes,
         )
-        // Verifica se tem reserva do horário atual
         if(hasBookingOnCurrentTime) {
             return false
         }
@@ -83,6 +91,7 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
         const fetch = async () => {
             if(!selectedDay) return;
             const bookings = await getBookings({ date: selectedDay, serviceId: service.id })
+
             setDayBookings(bookings)
         }
         fetch()
@@ -134,6 +143,14 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
         }
     }
 
+    const timeList = useMemo(() => {
+        if(!selectedDay) return []
+        return getTimeList({
+            bookings: dayBookings,
+            selectedDay
+        })
+    }, [dayBookings, selectedDay])
+
     return (
         <>
             <Card>
@@ -179,7 +196,7 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                                                 locale={ptBR}
                                                 selected={selectedDay}
                                                 onSelect={handleDateSelect}
-                                                fromDate={addDays(new Date(), 1)}
+                                                fromDate={new Date()}
                                                 styles={{
                                                     head_cell: {
                                                         width: "100%",
@@ -208,7 +225,7 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
 
                                         {selectedDay && (
                                             <div className="flex gap-3 overflow-x-auto border-b border-solid p-5 [&::-webkit-scrollbar]:hidden">
-                                                {getTimeList(dayBookings).map((time) => (
+                                                {timeList.length > 0 ? timeList?.map((time) => (
                                                     <Button
                                                         key={time}
                                                         variant={selectedTime === time ? "default" : "outline"}
@@ -217,7 +234,11 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                                                     >
                                                         {time}
                                                     </Button>
-                                                ))}
+                                                )) : (
+                                                    <p className="text-xs">
+                                                        😯 Não há horários diponíveis para este dia.
+                                                    </p>
+                                                )}
                                             </div>
                                         )}
 
