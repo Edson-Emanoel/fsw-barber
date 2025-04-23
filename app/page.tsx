@@ -13,6 +13,7 @@ import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
 const Home = async () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const session = await getServerSession(authOptions)
   const barbershops = await db.barbershop.findMany({});
   const popularBarbershops = await db.barbershop.findMany({
@@ -23,6 +24,7 @@ const Home = async () => {
   const bookings = session?.user
     ? await db.booking.findMany({
         where: {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           userId: (session?.user as any).id,
           date: {
             gte: new Date(),
@@ -30,6 +32,7 @@ const Home = async () => {
         },
         include: {
           service: {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             include: {
               barbershop: true,
             },
