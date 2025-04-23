@@ -9,6 +9,8 @@ import { Button } from "./_components/ui/button";
 import BookingItem from "./_components/booking-item";
 import { quickSearchOptions } from "./_constants/search"; 
 import BarbershopItem from "./_components/barbershop-item";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 const Home = async () => {
   const session = await getServerSession(authOptions)
@@ -45,8 +47,18 @@ const Home = async () => {
     <Header />
     <div className="p-5">
       {/* Texto */}
-      <h2 className="text-xl font-bold">Olá, Edson!</h2>
-      <p>Segunda-feira, 05 de agosto.</p>
+      <h2 className="text-xl font-bold">
+        Olá, {session?.user ? session?.user?.name: "seja bem-vindo"}!
+      </h2>
+      <p>
+        <span className="capitalize">
+          {format(new Date(), "EEEE, dd", { locale: ptBR })}
+        </span>
+        <span>&nbsp;de&nbsp;</span>
+        <span className="capitalize">
+          {format(new Date(), " MMMM", { locale: ptBR })}
+        </span>
+      </p>
 
       {/* Busca */}
       <div className="mt-6">

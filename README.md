@@ -1,3 +1,5 @@
+"feat: mudei a messagem de bem-vindo e só falta alguns ajustes e o deploy do projeto"
+
 ## Como o Projeto está ficando ...
 
 - No Mobile:
