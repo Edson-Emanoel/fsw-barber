@@ -2,7 +2,7 @@ import Image from "next/image";
 import Header from "./_components/header";
 import Link from "next/link";
 import { db } from "./_lib/prisma";
-import { authOptions } from "./_lib/auth";
+import { authOptions } from "@/app/_lib/auth"
 import Search from "./_components/search";
 import { getServerSession } from "next-auth";
 import { Button } from "./_components/ui/button";

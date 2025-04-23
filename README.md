@@ -38,6 +38,8 @@ npm install ts-node -D
 
 npx prisma db seed
 
+npx prisma migrate deploy
+
 ### TailwindCSS e Shadcn/ui
 
 npm install tailwindcss @tailwindcss/postcss postcss
