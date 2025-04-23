@@ -1,10 +1,24 @@
-"feat: mudei a messagem de bem-vindo e só falta alguns ajustes e o deploy do projeto"
+## Como o Projeto está ficando(No Mobile)
 
-## Como o Projeto está ficando ...
+- Página Principal:
 
-- No Mobile:
+<img src="./screens/dashboard.png" />
 
-<img src="./screens/Mobile01.png" />
+- Login:
+
+<img src="./screens/login.png" />
+
+- Página da Barbearia:
+
+<img src="./screens/barberPage.png" />
+
+- Agendamento:
+
+<img src="./screens/booking.png" />
+
+- Página Todos Agendamentos:
+
+<img src="./screens/all-bookings.png" />
 
 ## Comandos
 
