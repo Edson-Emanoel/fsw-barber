@@ -80,6 +80,7 @@ model BarbershopService { // Service da Barbearia
   barbershopId String
   barbershop Barbershop @relation(fields: [barbershopId], references: [id])
   bookings Booking[]
+  time Int
 }
 
 model Booking {

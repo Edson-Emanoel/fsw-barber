@@ -1,16 +1,17 @@
-import Image from "next/image";
-import Header from "./_components/header";
 import Link from "next/link";
+import Image from "next/image";
+import { format } from "date-fns";
 import { db } from "./_lib/prisma";
-import { authOptions } from "@/app/_lib/auth"
+import { ptBR } from "date-fns/locale";
+import Header from "./_components/header";
 import Search from "./_components/search";
 import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/_lib/auth";
 import { Button } from "./_components/ui/button";
 import BookingItem from "./_components/booking-item";
 import { quickSearchOptions } from "./_constants/search"; 
 import BarbershopItem from "./_components/barbershop-item";
-import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
+import { getConfirmedBookings } from "./_data/get-confirmed-bookings";
 
 const Home = async () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -21,29 +22,9 @@ const Home = async () => {
       name: "desc"
     }
   })
-  const bookings = session?.user
-    ? await db.booking.findMany({
-        where: {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          userId: (session?.user as any).id,
-          date: {
-            gte: new Date(),
-          },
-        },
-        include: {
-          service: {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            include: {
-              barbershop: true,
-            },
-          },
-        },
-        orderBy: {
-          date: "asc",
-        }
-    })
-  : []
-  
+
+  const confirmedBookings = await getConfirmedBookings()
+
   return ( 
   <div>
     {/* Header */}
@@ -90,16 +71,23 @@ const Home = async () => {
         />
       </div>
 
-      {/* Agendamento */}
-      <h2 className="mt-6 mb-3 ml-1 text-xs font-bold uppercase text-gray-400">
-        Meus Agendamentos
-      </h2>
+      {confirmedBookings.length > 0 && (
+        <>
+          {/* Agendamento */}
+          <h2 className="mt-6 mb-3 ml-1 text-xs font-bold uppercase text-gray-400">
+            Meus Agendamentos
+          </h2>
 
-      <div className="flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
-        {bookings.map((booking) => (
-          <BookingItem key={booking.id} booking={booking} />
-        ))}
-      </div>
+          <div className="flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+            {confirmedBookings.map((booking) => (
+              <BookingItem
+                key={booking.id}
+                booking={JSON.parse(JSON.stringify(booking))}
+              />
+            ))}
+          </div>
+        </>
+      )}
 
       <h2 className="mt-6 mb-3 ml-1 text-xs font-bold uppercase text-gray-400">
         Recomendados
